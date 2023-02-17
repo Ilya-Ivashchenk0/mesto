@@ -1,17 +1,19 @@
 # Проект: Место
 
-### Обзор
+**Описание проекта**
 
-* Figma
-* Картинки
+На странице прокта вы можее найти полезную информацию для путешествий по России
 
-**Figma**
+**Технологии**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+HTML5 + CSS3 + JavaScript
 
-**Картинки**
+Grid Layout and Flex Box
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+**Ссылка на макет**
 
-Удачи!
+https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1&t=tLT1W3EXeL2sci85-0
+
+**Ссылка проекта на GitHub Pages**
+
+https://ilya-ivashchenk0.github.io/mesto/

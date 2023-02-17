@@ -1,0 +1,8 @@
+.popup {
+  position: fixed;
+  background-color: #00000080;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
