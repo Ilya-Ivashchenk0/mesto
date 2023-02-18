@@ -9,8 +9,12 @@
   margin-top: 30px;
 }
 
+.popup__name:focus {
+  outline: none;
+}
+
 @media screen and (min-width: 320px) and (max-width: 879px) {
-  .popup__about {
+  .popup__name {
     width: 238px;
   }
 }
