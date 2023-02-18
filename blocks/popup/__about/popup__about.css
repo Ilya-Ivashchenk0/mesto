@@ -1,0 +1,16 @@
+.popup__about {
+  margin: 0 ;
+  border: 0;
+  width: 358px;
+  height: 24px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #000;
+  background-color: transparent;
+  margin-top: 30px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 879px) {
+  .popup__about {
+    width: 238px;
+  }
+}

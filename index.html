@@ -21,7 +21,7 @@
       <div class="profile__prfile-info">
 
         <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button hover-element"></button>
+        <button class="profile__edit-button hover-element" id="open_popup"></button>
         <p class="profile__subtitle">Исследователь океана</p>
 
       </div>
@@ -107,17 +107,24 @@
 
     </section>
 
-    <section class="popup">
+    <section class="popup" id="popup">
+
+
 
       <form action="" class="popup__container">
 
-        <h4 class="popup__title"></h4>
-        <input type="text" class="popup__name">
-        <input type="text" class="edit__about">
-        <button class="popup__save-button hover-element"></button>
+        <button class="popup__close" id="close_popup"></button>
+
+        <h4 class="popup__title">Редактировать профиль</h4>
+
+        <input type="text" id="username-input" name="username" class="popup__name" placeholder="Имя">
+
+        <input type="text" id="description-input" name="about" class="popup__about" placeholder="О себе">
+
+        <button type="submit" class="popup__save-button hover-element">Сохранить</button>
 
       </form>
-      <div class="popup__overlay"></div>
+      <!-- <div class="popup__overlay"></div> -->
 
     </section>
 
