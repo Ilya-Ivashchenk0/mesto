@@ -10,6 +10,7 @@
   display: block;
   grid-column: 2 / 3;
   align-self: flex-end;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 320px) and (max-width: 879px) {

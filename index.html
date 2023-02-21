@@ -18,15 +18,15 @@
 
       <img src="./images/image.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
 
-      <nav class="profile__prfile-info">
+      <div class="profile__prfile-info">
 
         <h1 class="profile__title" id="profTitle">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button hover-element" id="open_popup"></button>
+        <button type="button" class="profile__edit-button hover-element" id="open_popup"></button>
         <p class="profile__subtitle" id="profSubtitle">Исследователь океана</p>
 
-      </nav>
+      </div>
 
-      <button class="profile__add-button hover-element"></button>
+      <button type="button" class="profile__add-button hover-element"></button>
 
     </section>
 
@@ -34,7 +34,7 @@
 
       <article class="element">
 
-        <img src="./images/david-kovalenko-rkkr6-2I4sg-unsplash.jpg" class="element__mask">
+        <img src="./images/david-kovalenko-rkkr6-2I4sg-unsplash.jpg" class="element__mask-img" alt="Companion image">
 
         <div class="element__group">
 
@@ -46,7 +46,7 @@
       </article>
       <article class="element">
 
-        <img src="./images/nathan-anderson-cgO39sAIXpc-unsplash.jpg" class="element__mask">
+        <img src="./images/nathan-anderson-cgO39sAIXpc-unsplash.jpg" class="element__mask-img" alt="Companion image">
 
         <div class="element__group">
 
@@ -58,7 +58,7 @@
       </article>
       <article class="element">
 
-        <img src="./images/noah-silliman-y3IwQ9hUE4A-unsplash.jpg" class="element__mask">
+        <img src="./images/noah.jpg" class="element__mask-img" alt="Companion image">
 
         <div class="element__group">
 
@@ -70,7 +70,7 @@
       </article>
       <article class="element">
 
-        <img src="./images/sebastian-unrau-v4e3JI7DDHI-unsplash.jpg" class="element__mask">
+        <img src="./images/sebastian-unrau-v4e3JI7DDHI-unsplash.jpg" class="element__mask-img" alt="Companion image">
 
         <div class="element__group">
 
@@ -82,7 +82,7 @@
       </article>
       <article class="element">
 
-        <img src="./images/stephen-leonardi-gyIRjKPXupE-unsplash.jpg" class="element__mask">
+        <img src="./images/stephen-leonardi-gyIRjKPXupE-unsplash.jpg" class="element__mask-img" alt="Companion image">
 
         <div class="element__group">
 
@@ -94,7 +94,7 @@
       </article>
       <article class="element">
 
-        <img src="./images/ugne-vasyliute-Dag9cv89jb4-unsplash.jpg" class="element__mask">
+        <img src="./images/ugne-vasyliute-Dag9cv89jb4-unsplash.jpg" class="element__mask-img" alt="Companion image">
 
         <div class="element__group">
 
@@ -107,27 +107,27 @@
 
     </section>
 
-    <section class="popup" id="popup">
+    <div class="popup" id="popup">
 
+      <div class="popup__container">
 
+        <button type="button" class="popup__close hover-element" id="close_popup"></button>
 
-      <form action="" class="popup__container">
+        <form name="profile-form" class="popup__form">
 
-        <button class="popup__close hover-element" id="close_popup"></button>
+          <h3 class="popup__title">Редактировать профиль</h3>
 
-        <h4 class="popup__title">Редактировать профиль</h4>
+          <input type="text" id="username-input" name="username" class="popup__input_name" placeholder="Имя">
 
-        <input type="text" id="username-input" name="username" class="popup__name" placeholder="Имя">
+          <input type="text" id="description-input" name="about" class="popup__input_job" placeholder="О себе">
 
-        <input type="text" id="description-input" name="about" class="popup__about" placeholder="О себе">
+          <button type="submit" class="popup__save-button hover-element">Сохранить</button>
 
-        <button type="submit" class="popup__save-button hover-element">Сохранить</button>
+        </form>
 
-      </form>
+      </div>
 
-      <div class="popup__overlay"></div>
-
-    </section>
+    </div>
 
   </main>
 
@@ -137,7 +137,7 @@
 
 
 
-  <script src="./index.js"></script>
+  <script src="./scripts/index.js"></script>
 
 </body>
 </html>
