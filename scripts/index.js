@@ -1,6 +1,6 @@
-const openPopup = document.getElementById('open_popup')
-const closePopup = document.getElementById('close_popup')
-const popupContainer = document.getElementById('popup_conteiner')
+let openPopup = document.getElementById('open_popup')
+let closePopup = document.getElementById('close_popup')
+let popupContainer = document.querySelector('.popup')
 let formElement = document.querySelector('.popup')
 let nameInput = document.querySelector('.popup__input_name')
 let jobInput = document.querySelector('.popup__input_job')
@@ -15,7 +15,7 @@ function popupClose () {
   popupContainer.style.display = 'none'
 }
 
-openPopup.addEventListener('click', popupClose)
+closePopup.addEventListener('click', popupClose)
 
 
 
