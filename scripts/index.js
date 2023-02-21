@@ -1,7 +1,6 @@
 let openPopup = document.getElementById('open_popup')
 let closePopup = document.getElementById('close_popup')
 let popupContainer = document.querySelector('.popup')
-
 let profileName = document.querySelector('.profile__title')
 let profileAbout = document.querySelector('.profile__subtitle')
 
@@ -12,16 +11,12 @@ function popupOpen () {
   document.getElementById('username-input').value = `${profileTitleValue}`
   document.getElementById('job-input').value = `${profileSubtitleValue}`
 }
-
 openPopup.addEventListener('click', popupOpen)
 
 function popupClose () {
   popupContainer.style.display = 'none'
 }
-
 closePopup.addEventListener('click', popupClose)
-
-
 
 // Находим форму в DOM
 let formElement = document.querySelector('.popup')
