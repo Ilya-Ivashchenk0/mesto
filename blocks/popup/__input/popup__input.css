@@ -1,4 +1,4 @@
-.popup__input_name {
+.popup__input {
   margin: 0;
   border: 0;
   width: 358px;
@@ -13,12 +13,12 @@
   color: #000;
 }
 
-.popup__input_name:focus {
+.popup__input:focus {
   outline: none;
 }
 
 @media screen and (max-width: 879px) {
-  .popup__input_name {
+  .popup__input {
     width: 238px;
   }
 }
