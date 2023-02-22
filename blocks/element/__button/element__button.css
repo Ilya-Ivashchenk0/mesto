@@ -7,4 +7,5 @@
   background-image: url(../../../images/heart.svg);
   background-repeat: no-repeat;
   border: none;
+  cursor: pointer;
 }

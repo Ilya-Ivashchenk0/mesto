@@ -1,5 +1,5 @@
 .elements {
-  margin-top: 51px;
+  margin-top: 50px;
   max-width: 880px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -17,6 +17,7 @@
 
 @media screen and (max-width: 597px) {
   .elements {
+    margin-top: 36px;
     display: flex;
     flex-direction: column;
     align-items: center;
