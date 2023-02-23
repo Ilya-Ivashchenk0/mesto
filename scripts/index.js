@@ -1,26 +1,21 @@
 let openPopup = document.getElementById('open_popup')
 let closePopup = document.getElementById('close_popup')
-let saveButton = document.getElementById('save')
 let popupContainer = document.querySelector('.popup')
-let profileName = document.querySelector('.profile__title')
-let profileAbout = document.querySelector('.profile__subtitle')
-let userNameInput = document.getElementById('username-input')
-let jobUserInput = document.getElementById('job-input')
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form')
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__input_name')
-let jobInput = document.querySelector('.popup__input_job')
+let nameInput = document.querySelector('.popup__input_field_name')
+let jobInput = document.querySelector('.popup__input_field_job')
 // Выберите элементы, куда должны быть вставлены значения полей
-let inputName = document.getElementById('profile-title')
-let inputJob = document.getElementById('profile-subtitle')
+let profileName = document.querySelector('.profile__title')
+let profileAbout = document.querySelector('.profile__subtitle')
 
 function popupOpen () {
   popupContainer.classList.add('popup_opened')
   let profileTitleValue = profileName.textContent
   let profileSubtitleValue = profileAbout.textContent
-  userNameInput.value = `${profileTitleValue}`
-  jobUserInput.value = `${profileSubtitleValue}`
+  nameInput.value = `${profileTitleValue}`
+  jobInput.value = `${profileSubtitleValue}`
 }
 
 function popupClose () {
@@ -37,8 +32,8 @@ function handleFormSubmit (evt) {
   let nameValue = nameInput.value
   let jobValue = jobInput.value
   // Вставьте новые значения с помощью textContent
-  inputName.textContent = `${nameValue}`
-  inputJob.textContent = `${jobValue}`
+  profileName.textContent = `${nameValue}`
+  profileAbout.textContent = `${jobValue}`
   popupClose()
 }
 
