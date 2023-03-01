@@ -7,132 +7,86 @@
     <link rel="stylesheet" href="./pages/index.css">
   </head>
 <body class="page">
-
   <header class="header">
     <img src="./images/logo.svg" alt="Логотип" class="header__logo">
   </header>
-
   <main>
-
     <section class="profile">
-
-      <img src="./images/image.jpg" alt="Аватар пользователя" class="profile__avatar">
-
+      <img src="./images/sticker.webp" alt="Аватар пользователя" class="profile__avatar">
       <div class="profile__prfile-info">
-
-        <h1 class="profile__title" id="profile-title">Жак-Ив Кусто</h1>
+        <h1 class="profile__title">Фродо</h1>
         <button type="button" class="profile__edit-button hover-element" aria-label="Edit" id="open_popup"></button>
-        <p class="profile__subtitle" id="profile-subtitle">Исследователь океана</p>
-
+        <p class="profile__subtitle">Доставщик Колец власти</p>
       </div>
-
-      <button type="button" class="profile__add-button hover-element"></button>
-
+      <button type="button" class="profile__add-button hover-element" id="open_popup-card"></button>
     </section>
-
     <section class="elements">
-
       <article class="element">
-
-        <img src="./images/david-kovalenko-rkkr6-2I4sg-unsplash.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-
+        <img src="https://staskulesh.com/wp-content/uploads/2012/05/nz_hobbiton_IMG_8526-800x533.jpg" class="element__mask-img" alt="Сопутствующее изображение">
         <div class="element__group">
-
-          <h2 class="element__title">Карачаевск</h2>
-          <button class="element__button hover-element" type="button"></button>
-
-        </div>
-
-      </article>
-
-      <article class="element">
-
-        <img src="./images/nathan-anderson-cgO39sAIXpc-unsplash.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-
-        <div class="element__group">
-
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button class="element__button hover-element" type="button"></button>
-
-        </div>
-
-      </article>
-
-      <article class="element">
-
-        <img src="./images/noah.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-
-        <div class="element__group">
-
-          <h2 class="element__title">Домбай</h2>
-          <button class="element__button hover-element" type="button"></button>
-
-        </div>
-
-      </article>
-      <article class="element">
-
-        <img src="./images/sebastian-unrau-v4e3JI7DDHI-unsplash.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-
-        <div class="element__group">
-
           <h2 class="element__title">Шир</h2>
           <button class="element__button hover-element" type="button"></button>
-
         </div>
-
       </article>
       <article class="element">
-
-        <img src="./images/stephen-leonardi-gyIRjKPXupE-unsplash.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-
+        <img src="https://gamerwall.pro/uploads/posts/2022-03/1646211822_5-gamerwall-pro-p-gorod-elfov-vlastelin-kolets-rivendell-kra-5.jpg" class="element__mask-img" alt="Сопутствующее изображение">
         <div class="element__group">
-
-          <h2 class="element__title">Лес лесов</h2>
+          <h2 class="element__title">Ривенделл</h2>
           <button class="element__button hover-element" type="button"></button>
-
         </div>
-
       </article>
       <article class="element">
-
-        <img src="./images/ugne-vasyliute-Dag9cv89jb4-unsplash.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-
+        <img src="https://ltdfoto.ru/images/2023/02/28/1111.jpg" class="element__mask-img" alt="Сопутствующее изображение">
         <div class="element__group">
-
-          <h2 class="element__title">Роща</h2>
+          <h2 class="element__title">Врата Мории</h2>
           <button class="element__button hover-element" type="button"></button>
-
         </div>
-
       </article>
-
+      <article class="element">
+        <img src="https://pibig.info/uploads/posts/2022-12/1670277718_1-pibig-info-p-les-fangorn-krasivo-2.jpg" class="element__mask-img" alt="Сопутствующее изображение">
+        <div class="element__group">
+          <h2 class="element__title">Лес Фангорн</h2>
+          <button class="element__button hover-element" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="https://static.wikia.nocookie.net/lotr/images/e/e4/Minas_Tirith.jpg/revision/latest?cb=20110408141647&path-prefix=ru" class="element__mask-img" alt="Сопутствующее изображение">
+        <div class="element__group">
+          <h2 class="element__title">Минас Тирит</h2>
+          <button class="element__button hover-element" type="button"></button>
+        </div>
+      </article>
+      <article class="element">
+        <img src="https://upload.wikimedia.org/wikipedia/ru/6/6a/Mordor.png" class="element__mask-img" alt="Сопутствующее изображение">
+        <div class="element__group">
+          <h2 class="element__title">Мордор</h2>
+          <button class="element__button hover-element" type="button"></button>
+        </div>
+      </article>
     </section>
-
-    <div class="popup" id="popup">
-
+    <div class="popup">
       <div class="popup__container" id="popup_conteiner">
-
         <button type="button" class="popup__close hover-element" id="close_popup"></button>
-
         <form name="profile-form" class="popup__form">
-
           <h3 class="popup__title">Редактировать профиль</h3>
-
           <input type="text" id="username-input" name="username" class="popup__input popup__input_field_name" placeholder="Имя">
-
           <input type="text" id="job-input" name="about" class="popup__input popup__input_field_job" placeholder="О себе">
-
           <button type="submit" class="popup__save-button hover-element" id="save">Сохранить</button>
-
         </form>
-
       </div>
-
     </div>
-
+    <div class="popup-card">
+      <div class="popup-card__container" id="popup-card_conteiner">
+        <button type="button" class="popup-card__close hover-element" id="close_popup-card"></button>
+        <form name="profile-card-form" class="popup-card__form">
+          <h3 class="popup-card__title">Новое место</h3>
+          <input type="text" id="username-input" name="username" class="popup-card__input popup-card__input_field_designation" placeholder="Название">
+          <input type="text" id="job-input" name="about" class="popup-card__input popup-card__input_field_url" placeholder="Ссылка на картинку">
+          <button type="submit" class="popup-card__save-button hover-element" id="save_popup-card">Сохранить</button>
+        </form>
+      </div>
+    </div>
   </main>
-
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
@@ -140,6 +94,5 @@
 
 
   <script src="./scripts/index.js"></script>
-
 </body>
 </html>

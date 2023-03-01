@@ -27,3 +27,11 @@
 @import url(../blocks/hover-element/hover-element.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup-card/popup-card.css);
+@import url(../blocks/popup-card/__close/popup-card__close.css);
+@import url(../blocks/popup-card/__container/popup-card__container.css);
+@import url(../blocks/popup-card/__form/popup-card__form.css);
+@import url(../blocks/popup-card/__input/popup-card__input.css);
+@import url(../blocks/popup-card/__save-button/popup-card__save-button.css);
+@import url(../blocks/popup-card/__title/popup-card__title.css);
+@import url(../blocks/popup-card/_opened/popup-card_opened.css);
