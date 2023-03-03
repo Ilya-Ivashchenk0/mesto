@@ -21,48 +21,15 @@
       <button type="button" class="profile__add-button hover-element" id="open_popup-card"></button>
     </section>
     <section class="elements">
-      <article class="element">
-        <img src="https://staskulesh.com/wp-content/uploads/2012/05/nz_hobbiton_IMG_8526-800x533.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-        <div class="element__group">
-          <h2 class="element__title">Шир</h2>
-          <button class="element__button hover-element" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="https://gamerwall.pro/uploads/posts/2022-03/1646211822_5-gamerwall-pro-p-gorod-elfov-vlastelin-kolets-rivendell-kra-5.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-        <div class="element__group">
-          <h2 class="element__title">Ривенделл</h2>
-          <button class="element__button hover-element" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="https://ltdfoto.ru/images/2023/02/28/1111.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-        <div class="element__group">
-          <h2 class="element__title">Врата Мории</h2>
-          <button class="element__button hover-element" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="https://pibig.info/uploads/posts/2022-12/1670277718_1-pibig-info-p-les-fangorn-krasivo-2.jpg" class="element__mask-img" alt="Сопутствующее изображение">
-        <div class="element__group">
-          <h2 class="element__title">Лес Фангорн</h2>
-          <button class="element__button hover-element" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="https://static.wikia.nocookie.net/lotr/images/e/e4/Minas_Tirith.jpg/revision/latest?cb=20110408141647&path-prefix=ru" class="element__mask-img" alt="Сопутствующее изображение">
-        <div class="element__group">
-          <h2 class="element__title">Минас Тирит</h2>
-          <button class="element__button hover-element" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="https://upload.wikimedia.org/wikipedia/ru/6/6a/Mordor.png" class="element__mask-img" alt="Сопутствующее изображение">
-        <div class="element__group">
-          <h2 class="element__title">Мордор</h2>
-          <button class="element__button hover-element" type="button"></button>
-        </div>
-      </article>
+      <template id="template">
+        <article class="element">
+          <img class="element__mask-img" alt="Сопутствующее изображение">
+          <div class="element__group">
+            <h2 class="element__title"></h2>
+            <button class="element__button hover-element" type="button"></button>
+          </div>
+        </article>
+      </template>
     </section>
     <div class="popup">
       <div class="popup__container" id="popup_conteiner">
@@ -90,9 +57,6 @@
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
-
-
-
   <script src="./scripts/index.js"></script>
 </body>
 </html>

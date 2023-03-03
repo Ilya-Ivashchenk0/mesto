@@ -8,11 +8,18 @@ const popupCardContainer = document.querySelector('.popup-card')
 const formElement = document.querySelector('.popup__form')
 const cardFormElement = document.querySelector('.popup-card__form')
 // Находим поля формы в DOM
-const nameInput = document.querySelector('.popup__input_field_name')
-const jobInput = document.querySelector('.popup__input_field_job')
+let nameInput = document.querySelector('.popup__input_field_name')
+let jobInput = document.querySelector('.popup__input_field_job')
+
+let cardNameInput = document.querySelector('.popup-card__input_field_designation')
+let cardUrlInput = document.querySelector('.popup-card__input_field_url')
 // Выберите элементы, куда должны быть вставлены значения полей
 const profileName = document.querySelector('.profile__title')
 const profileAbout = document.querySelector('.profile__subtitle')
+
+const cardTemplate = document.querySelector('#template').content
+
+const cardsContainer = document.querySelector('.elements')
 
 const initialCards = [
   {
@@ -25,7 +32,7 @@ const initialCards = [
   },
   {
     name: 'Врата Мории',
-    link: 'https://ltdfoto.ru/images/2023/02/28/1111.jpg'
+    link: 'https://i.ibb.co/3rvpNfL/55181515.jpg'
   },
   {
     name: 'Лес Фангорн',
@@ -40,7 +47,6 @@ const initialCards = [
     link: 'https://upload.wikimedia.org/wikipedia/ru/6/6a/Mordor.png'
   }
 ]
-
 
 function popupOpen () {
   popupContainer.classList.add('popup_opened')
@@ -77,12 +83,43 @@ function handleFormSubmit (evt) {
   popupClose()
 }
 
+
+
+
+
+const createCard = (data) => {
+  // Клонируем шаблон, наполняем его информацией из объекта data, навешиваем всякие обработчики событий, о которых будет инфа ниже
+  const cardCopy = cardTemplate.cloneNode(true)
+  cardCopy.querySelector('.element__title').textContent = data.name
+  cardCopy.querySelector('.element__mask-img').src = data.link
+  // Возвращаем получившуюся карточку
+  return cardCopy
+}
+
+const renderCard = (data) => {
+  // Создаем карточку на основе данных
+  const cardElement = createCard(data)
+  // Помещаем ее в контейнер карточек
+  cardsContainer.prepend(cardElement)
+}
+
 function handleCardFormSubmit (evt) {
   evt.preventDefault()
 
+  let enterInfo = {
+    name: `${cardNameInput.value}`,
+    link: `${cardUrlInput.value}`
+  }
+
+  renderCard(enterInfo)
 
   popupCardClose()
 }
+
+
+initialCards.forEach(card => { renderCard(card) })
+
+
 
 closePopup.addEventListener('click', popupClose)
 openPopup.addEventListener('click', popupOpen)
