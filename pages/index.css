@@ -12,8 +12,10 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__trash/element__trash.css);
 @import url(../blocks/element/__group/element__group.css);
 @import url(../blocks/element/__button/element__button.css);
+@import url(../blocks/element/__button/_color_black/element__button_color_black.css);
 @import url(../blocks/element/__mask-img/element__mask-img.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/popup/popup.css);
