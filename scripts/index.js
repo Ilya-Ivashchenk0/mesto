@@ -123,6 +123,7 @@ initialCards.forEach(card => { renderCard(card) })
 
 
 let trashButtons = document.querySelectorAll('.element__trash')
+let lickButtons = document.querySelectorAll('.element__trash')
 
 trashButtons.forEach(function (card) {
   card.addEventListener('click', function (evt) {
