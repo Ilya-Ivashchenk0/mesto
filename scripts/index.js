@@ -97,13 +97,13 @@ const createCard = (data) => {
 const renderCard = (data) => {
   // Создаем карточку на основе данных
   const cardElement = createCard(data)
-
-
+  // Вешаем событие
+  let cardElemntPlace = cardElement.querySelector('.element__trash')
+  cardElemntPlace.addEventListener('click', function (evt) {
+    evt.target.closest('.element').remove()
+  })
   // Помещаем ее в контейнер карточек
   cardsContainer.prepend(cardElement)
-
-
-  // Вешаем событие
 }
 
 function handleCardFormSubmit (evt) {
