@@ -121,9 +121,14 @@ function handleCardFormSubmit (evt) {
 
 initialCards.forEach(card => { renderCard(card) })
 
-
 let trashButtons = document.querySelectorAll('.element__trash')
-let lickButtons = document.querySelectorAll('.element__trash')
+let likesButtons = document.querySelectorAll('.element__button')
+
+likesButtons.forEach(function (button) {
+  button.addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__button_color_black')
+  })
+})
 
 trashButtons.forEach(function (card) {
   card.addEventListener('click', function (evt) {
