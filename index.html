@@ -23,7 +23,7 @@
     <section class="elements">
       <template id="template">
         <article class="element">
-          <img class="element__mask-img" alt="Сопутствующее изображение">
+          <img type="button" class="element__mask-img" alt="Сопутствующее изображение">
           <button class="element__trash hover-element" type="button" id="trash"></button>
           <div class="element__group">
             <h2 class="element__title"></h2>
@@ -55,9 +55,9 @@
       </div>
     </div>
     <div class="popup-place">
+      <button type="button" class="popup-place__close hover-element" id="close_popup-place"></button>
       <div class="popup-place__container" id="popup-place_conteiner">
-        <button type="button" class="popup-place__close hover-element" id="close_popup-card"></button>
-        <img type="button" alt="Выбранное изображение" class="popup-place__img">
+        <img class="popup-place__img">
         <p class="popup-place__title"></p>
       </div>
     </div>

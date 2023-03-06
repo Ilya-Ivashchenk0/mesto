@@ -43,7 +43,6 @@ const initialCards = [
     name: 'Шир',
     link: 'https://staskulesh.com/wp-content/uploads/2012/05/nz_hobbiton_IMG_8526-800x533.jpg'
   }
-
 ]
 
 function log (a) {
@@ -108,14 +107,11 @@ const renderCard = (data) => {
 
 function handleCardFormSubmit (evt) {
   evt.preventDefault()
-
   let enterInfo = {
     name: `${cardNameInput.value}`,
     link: `${cardUrlInput.value}`
   }
-
   renderCard(enterInfo)
-
   popupCardClose()
 }
 
@@ -123,6 +119,8 @@ initialCards.forEach(card => { renderCard(card) })
 
 let trashButtons = document.querySelectorAll('.element__trash')
 let likesButtons = document.querySelectorAll('.element__button')
+const closePopupPlace = document.getElementById('close_popup-place')
+let openPlaceImg = document.querySelectorAll('.element__mask-img')
 
 likesButtons.forEach(function (button) {
   button.addEventListener('click', function (evt) {
@@ -136,10 +134,29 @@ trashButtons.forEach(function (card) {
   })
 })
 
+const popupPlaceContainer = document.querySelector('.popup-place')
+
+function popupPlaceOpen (data) {
+  popupPlaceContainer.classList.add('popup-place_opened')
+  popupPlaceContainer.querySelector('.popup-place__img').setAttribute('src', data.src)
+  popupPlaceContainer.querySelector('.popup-place__img').setAttribute('alt', data.alt)
+  popupPlaceContainer.querySelector('.popup-place__title').textContent = data.title
+}
+
+openPlaceImg.forEach(function (img) {
+  img.addEventListener('click', function (evt) {
+    let imgInfo = {
+      src: evt.target.closest('.element__mask-img').getAttribute('src'),
+      alt: evt.target.closest('.element__mask-img').getAttribute('alt'),
+      title: evt.target.closest('.element').querySelector('.element__title').textContent
+    }
+    popupPlaceOpen(imgInfo)
+  })
+})
+
 closePopup.addEventListener('click', popupClose)
 openPopup.addEventListener('click', popupOpen)
 formElement.addEventListener('submit', handleFormSubmit)
-
 closePopupCard.addEventListener('click', popupCardClose)
 openPopupCard.addEventListener('click', popupCardOpen)
 cardFormElement.addEventListener('submit', handleCardFormSubmit)
