@@ -121,6 +121,7 @@ let trashButtons = document.querySelectorAll('.element__trash')
 let likesButtons = document.querySelectorAll('.element__button')
 const closePopupPlace = document.getElementById('close_popup-place')
 let openPlaceImg = document.querySelectorAll('.element__mask-img')
+const popupPlaceContainer = document.querySelector('.popup-place')
 
 likesButtons.forEach(function (button) {
   button.addEventListener('click', function (evt) {
@@ -134,13 +135,15 @@ trashButtons.forEach(function (card) {
   })
 })
 
-const popupPlaceContainer = document.querySelector('.popup-place')
-
 function popupPlaceOpen (data) {
   popupPlaceContainer.classList.add('popup-place_opened')
   popupPlaceContainer.querySelector('.popup-place__img').setAttribute('src', data.src)
   popupPlaceContainer.querySelector('.popup-place__img').setAttribute('alt', data.alt)
   popupPlaceContainer.querySelector('.popup-place__title').textContent = data.title
+}
+
+function popupPlaceClose () {
+  popupPlaceContainer.classList.remove('popup-place_opened')
 }
 
 openPlaceImg.forEach(function (img) {
@@ -160,3 +163,4 @@ formElement.addEventListener('submit', handleFormSubmit)
 closePopupCard.addEventListener('click', popupCardClose)
 openPopupCard.addEventListener('click', popupCardOpen)
 cardFormElement.addEventListener('submit', handleCardFormSubmit)
+closePopupPlace.addEventListener('click', popupPlaceClose)
