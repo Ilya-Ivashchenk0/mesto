@@ -37,7 +37,7 @@ function openPopup (data) {
     popupImgContainer.classList.add('popup_opened')
     imgPlace.setAttribute('src', data.src)
     imgPlace.setAttribute('alt', data.alt)
-    popupImgContainer.querySelector('.popup__title_place_img').textContent = data.title
+    popupImgContainer.querySelector('.popup__img-title').textContent = data.title
   } else {
     data.classList.add('popup_opened')
   }
