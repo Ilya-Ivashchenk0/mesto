@@ -1,4 +1,4 @@
-.popup-place__close {
+.popup__button_close {
   background-color: #ffffff00;
   width: 32px;
   height: 32px;
@@ -15,7 +15,7 @@
 }
 
 @media screen and (max-width: 879px) {
-  .popup-place__close {
+  .popup__button_close {
     width: 20px;
     height: 20px;
     right: 0;
