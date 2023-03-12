@@ -58,8 +58,9 @@ function handleProfileFormSubmit (evt) {
 const createCard = (data) => {
   // Клонируем шаблон, наполняем его информацией из объекта data, навешиваем всякие обработчики событий, о которых будет инфа ниже
   const cardCopy = cardTemplate.cloneNode(true)
+  const maskImg = cardCopy.querySelector('.element__mask-img')
   cardCopy.querySelector('.element__title').textContent = data.name
-  cardCopy.querySelector('.element__mask-img').src = data.link
+  maskImg.src = data.link
   const trashButton = cardCopy.querySelector('.element__trash')
   trashButton.addEventListener('click', function (evt) {
     evt.target.closest('.element').remove()
@@ -68,17 +69,10 @@ const createCard = (data) => {
   likesButton.addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__button_color_black')
   })
-  const cardCopyImg = cardCopy.querySelector('.element__mask-img')
-  cardCopyImg.addEventListener('click', function (evt) {
-    const thisCardImg = evt.target.closest('.element__mask-img')
-    const imgInfo = {
-      src: thisCardImg.getAttribute('src'),
-      alt: thisCardImg.getAttribute('alt'),
-      title: evt.target.closest('.element').querySelector('.element__title').textContent
-    }
-    imgPlace.setAttribute('src', imgInfo.src)
-    imgPlace.setAttribute('alt', imgInfo.alt)
-    imgTitle.textContent = imgInfo.title
+  maskImg.addEventListener('click', function (data) {
+    imgPlace.setAttribute('src', maskImg.getAttribute('src'))
+    imgPlace.setAttribute('alt', maskImg.getAttribute('alt'))
+    imgTitle.textContent = maskImg.closest('.element').querySelector('.element__title').textContent
     openPopup(popupImgContainer)
   })
   // Возвращаем получившуюся карточку
@@ -101,6 +95,8 @@ function handleCardFormSubmit (evt) {
   }
   renderCard(enterInfo)
   closePopup(popupCardContainer)
+  cardNameInput.value = ''
+  cardUrlInput.value = ''
 }
 
 initialCards.forEach(card => { renderCard(card) })
@@ -112,7 +108,6 @@ buttonClosePopupProfile.addEventListener('click', function() {closePopup(popupPr
 buttonOpenPopupCard.addEventListener('click', function() {openPopup(popupCardContainer)})
 buttonClosePopupCard.addEventListener('click', function() {closePopup(popupCardContainer)})
 //кнопки попапа картинки
-buttonClosePopupImg.addEventListener('click', function() {openPopup(popupImgContainer)})
 buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgContainer)})
 //кнопки форм
 popupProfileForm.addEventListener('submit', handleProfileFormSubmit)

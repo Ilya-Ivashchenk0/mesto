@@ -19,6 +19,7 @@
 @import url(../blocks/element/__mask-img/element__mask-img.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_type/popup_type_img.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__img-container/popup__img-container.css);
