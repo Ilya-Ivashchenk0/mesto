@@ -19,37 +19,30 @@ const cardUrlInput = document.querySelector('.popup__input_field_url')
 // Выберите элементы, куда должны быть вставлены значения полей
 const profileName = document.querySelector('.profile__title')
 const profileJob = document.querySelector('.profile__subtitle')
-const cardTemplate = document.querySelector('#template').content
+const cardTemplate = document.querySelector('#template').content.querySelector('.element')
 const cardsContainer = document.querySelector('.elements')
-
-let imgInfo
+const imgPlace = document.querySelector('.popup__img')
+const imgTitle = document.querySelector('.popup__img-title')
 
 function openPopup (data) {
-  if (data == popupProfileContainer) {
-    data.classList.add('popup_opened')
-    const profileTitleValue = profileName.textContent
-    const profileSubtitleValue = profileJob.textContent
-    formNameInput.value = `${profileTitleValue}`
-    formJobInput.value = `${profileSubtitleValue}`
-  } else if (data == imgInfo) {
-    popupImgContainer.classList.add('popup__place_img')
-    const imgPlace = popupImgContainer.querySelector('.popup__img')
-    popupImgContainer.classList.add('popup_opened')
-    imgPlace.setAttribute('src', data.src)
-    imgPlace.setAttribute('alt', data.alt)
-    popupImgContainer.querySelector('.popup__img-title').textContent = data.title
-  } else {
-    data.classList.add('popup_opened')
-  }
+  data.classList.add('popup_opened')
 }
 
 function closePopup (data) {
   data.classList.remove('popup_opened')
 }
 
+function enterProfileInfo () {
+  const profileTitleValue = profileName.textContent
+  const profileSubtitleValue = profileJob.textContent
+  formNameInput.value = `${profileTitleValue}`
+  formJobInput.value = `${profileSubtitleValue}`
+  openPopup(popupProfileContainer)
+}
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function handleFormSubmit (evt) {
+function handleProfileFormSubmit (evt) {
   evt.preventDefault()// Эта строчка отменяет стандартную отправку формы.
   // Так мы можем определить свою логику отправки.
   // О том, как это делать, расскажем позже.
@@ -78,12 +71,15 @@ const createCard = (data) => {
   const cardCopyImg = cardCopy.querySelector('.element__mask-img')
   cardCopyImg.addEventListener('click', function (evt) {
     const thisCardImg = evt.target.closest('.element__mask-img')
-    imgInfo = {
+    const imgInfo = {
       src: thisCardImg.getAttribute('src'),
       alt: thisCardImg.getAttribute('alt'),
       title: evt.target.closest('.element').querySelector('.element__title').textContent
     }
-    openPopup(imgInfo)
+    imgPlace.setAttribute('src', imgInfo.src)
+    imgPlace.setAttribute('alt', imgInfo.alt)
+    imgTitle.textContent = imgInfo.title
+    openPopup(popupImgContainer)
   })
   // Возвращаем получившуюся карточку
   return cardCopy
@@ -93,10 +89,6 @@ const renderCard = (data) => {
   // Создаем карточку на основе данных
   const cardElement = createCard(data)
   // Вешаем событие
-  const cardElemntPlace = cardElement.querySelector('.element__trash')
-  cardElemntPlace.addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove()
-  })
   // Помещаем ее в контейнер карточек
   cardsContainer.prepend(cardElement)
 }
@@ -114,7 +106,7 @@ function handleCardFormSubmit (evt) {
 initialCards.forEach(card => { renderCard(card) })
 
 //кнопки попапа профиля
-buttonOpenPopupProfile.addEventListener('click', function() {openPopup(popupProfileContainer)})
+buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
 buttonClosePopupProfile.addEventListener('click', function() {closePopup(popupProfileContainer)})
 //кнопки попапа карточек
 buttonOpenPopupCard.addEventListener('click', function() {openPopup(popupCardContainer)})
@@ -123,5 +115,5 @@ buttonClosePopupCard.addEventListener('click', function() {closePopup(popupCardC
 buttonClosePopupImg.addEventListener('click', function() {openPopup(popupImgContainer)})
 buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgContainer)})
 //кнопки форм
-popupProfileForm.addEventListener('submit', handleFormSubmit)
+popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
 popupCardForm.addEventListener('submit', handleCardFormSubmit)
