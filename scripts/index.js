@@ -24,6 +24,7 @@ const cardTemplate = document.querySelector('#template').content.querySelector('
 const cardsContainer = document.querySelector('.elements')
 const imgPlace = document.querySelector('.popup__img')
 const imgTitle = document.querySelector('.popup__img-title')
+const popups = document.querySelectorAll('.popup')
 
 function openPopup (data) {
   data.classList.add('popup_opened')
@@ -113,7 +114,16 @@ buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgCon
 //кнопки форм
 popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
 popupCardForm.addEventListener('submit', handleCardFormSubmit)
-
-popupProfileContainer.addEventListener('click', function() {closePopup(popupProfileContainer)})
-popupCardContainer.addEventListener('click', function() {closePopup(popupCardContainer)})
-popupImgContainer.addEventListener('click', function() {closePopup(popupImgContainer)})
+// закрытие попапов при нажатии на оверлей и esc
+popups.forEach(popup => {
+  popup.addEventListener('click', event => {
+    if (event.target === popup) {
+      closePopup(popup)
+    }
+  })
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closePopup(popup)
+    }
+  })
+})
