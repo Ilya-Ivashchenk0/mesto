@@ -4,6 +4,7 @@ const buttonClosePopupProfile = document.getElementById('button_close_popup_prof
 const buttonOpenPopupCard = document.getElementById('button_open_popup_card')
 const buttonClosePopupCard = document.getElementById('button_close_popup_card')
 const buttonClosePopupImg = document.getElementById('button_close_popup_img')
+const overlayClosePopupImg = document.getElementById('button_close_popup_img')
 //контейнеры попапов
 const popupProfileContainer = document.querySelector('.popup_type_profile')
 const popupCardContainer = document.querySelector('.popup_type_card')
@@ -112,3 +113,7 @@ buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgCon
 //кнопки форм
 popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
 popupCardForm.addEventListener('submit', handleCardFormSubmit)
+
+popupProfileContainer.addEventListener('click', function() {closePopup(popupProfileContainer)})
+popupCardContainer.addEventListener('click', function() {closePopup(popupCardContainer)})
+popupImgContainer.addEventListener('click', function() {closePopup(popupImgContainer)})
