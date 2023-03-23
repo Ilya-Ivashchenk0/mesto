@@ -102,6 +102,7 @@ function handleCardFormSubmit (evt) {
   evt.target.reset()
 }
 
+// закрытие попапов при нажатии на esc
 function closeByEscape (evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened')
@@ -128,7 +129,7 @@ buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgCon
 //кнопки форм
 popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
 popupCardForm.addEventListener('submit', handleCardFormSubmit)
-// закрытие попапов при нажатии на оверлей и esc
+// закрытие попапов при нажатии на оверлей
 popups.forEach(popup => {
   popup.addEventListener('click', event => {
     if (event.target === popup) {
