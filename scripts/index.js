@@ -28,12 +28,12 @@ const popups = document.querySelectorAll('.popup')
 
 function openPopup (data) {
   data.classList.add('popup_opened')
-  document.addEventListener('keydown', evt => closeByEscape(evt))
+  document.addEventListener('keydown', closeByEscape)
 }
 
 function closePopup (data) {
   data.classList.remove('popup_opened')
-  document.removeEventListener('keydown', evt => closeByEscape(evt))
+  document.removeEventListener('keydown', closeByEscape)
 }
 
 function enterProfileInfo () {
