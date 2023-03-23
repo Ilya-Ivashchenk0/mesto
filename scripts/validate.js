@@ -7,12 +7,6 @@ const objValidate = {
   errorClass: 'popup__error_visible'
 }
 
-function log(a) {
-  console.log(a)
-}
-
-
-
 // ** функция для наложения обработчиков на поля формы
 function setEventListeners (form, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass) {
   const inputs = form.querySelectorAll(inputSelector)
@@ -94,29 +88,6 @@ function setInitialValidationState (form, inputSelector, submitButtonSelector, i
 
   toggleSubmitButtonState(inputs, submitButton, inactiveButtonClass)
 }
-
-
-
-
-// function buttonDisabling (form) {
-//   const buttonForm = form.querySelector(submitButtonSelector)
-//   const formInputs = form.querySelectorAll(inputSelector)
-//   formInputs.forEach(input => {
-//     input.addEventListener
-//   })
-//   if () {
-
-//   } else {
-
-//   }
-// }
-
-
-
-
-// function enableValidation ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }) {
-
-// }
 
 enableValidation(objValidate)
 

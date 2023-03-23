@@ -28,10 +28,12 @@ const popups = document.querySelectorAll('.popup')
 
 function openPopup (data) {
   data.classList.add('popup_opened')
+  document.addEventListener('keydown', evt => closeByEscape(evt))
 }
 
 function closePopup (data) {
   data.classList.remove('popup_opened')
+  document.removeEventListener('keydown', evt => closeByEscape(evt))
 }
 
 function enterProfileInfo () {
@@ -97,8 +99,14 @@ function handleCardFormSubmit (evt) {
   }
   renderCard(enterInfo)
   closePopup(popupCardContainer)
-  cardNameInput.value = ''
-  cardUrlInput.value = ''
+  evt.target.reset()
+}
+
+function closeByEscape (evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup)
+  }
 }
 
 initialCards.forEach(card => { renderCard(card) })
@@ -107,7 +115,13 @@ initialCards.forEach(card => { renderCard(card) })
 buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
 buttonClosePopupProfile.addEventListener('click', function() {closePopup(popupProfileContainer)})
 //кнопки попапа карточек
-buttonOpenPopupCard.addEventListener('click', function() {openPopup(popupCardContainer)})
+buttonOpenPopupCard.addEventListener('click', function() {
+  openPopup(popupCardContainer)
+  const buttonSavePopup = document.getElementById('save_popup-card')
+  buttonSavePopup.setAttribute('disabled', 'disabled')
+  buttonSavePopup.classList.add('popup__save-button_disabled')
+})
+
 buttonClosePopupCard.addEventListener('click', function() {closePopup(popupCardContainer)})
 //кнопки попапа картинки
 buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgContainer)})
@@ -118,11 +132,6 @@ popupCardForm.addEventListener('submit', handleCardFormSubmit)
 popups.forEach(popup => {
   popup.addEventListener('click', event => {
     if (event.target === popup) {
-      closePopup(popup)
-    }
-  })
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') {
       closePopup(popup)
     }
   })
