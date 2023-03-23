@@ -25,6 +25,7 @@ const cardsContainer = document.querySelector('.elements')
 const imgPlace = document.querySelector('.popup__img')
 const imgTitle = document.querySelector('.popup__img-title')
 const popups = document.querySelectorAll('.popup')
+const buttonSavePopup = document.getElementById('save_popup-card')
 
 function openPopup (data) {
   data.classList.add('popup_opened')
@@ -118,7 +119,6 @@ buttonClosePopupProfile.addEventListener('click', function() {closePopup(popupPr
 //кнопки попапа карточек
 buttonOpenPopupCard.addEventListener('click', function() {
   openPopup(popupCardContainer)
-  const buttonSavePopup = document.getElementById('save_popup-card')
   buttonSavePopup.setAttribute('disabled', 'disabled')
   buttonSavePopup.classList.add('popup__save-button_disabled')
 })
