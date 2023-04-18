@@ -1,11 +1,11 @@
-const initialCards = [
+export const initialCards = [
   {
     name: 'Мордор',
     link: 'https://upload.wikimedia.org/wikipedia/ru/6/6a/Mordor.png'
   },
   {
     name: 'Минас Тирит',
-    link: 'https://static.wikia.nocookie.net/lotr/images/e/e4/Minas_Tirith.jpg/revision/latest?cb=20110408141647&path-prefix=ru'
+    link: 'https://i.ibb.co/1R8cZJL/building-city-gandalf-minas-tirith-wallpaper-preview.jpg'
   },
   {
     name: 'Лес Фангорн',

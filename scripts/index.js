@@ -1,3 +1,7 @@
+import { initialCards } from './initialCards.js';
+import { Card } from './Card.js'
+
+
 //кнопки открытия и закрытия попапов
 const buttonOpenPopupProfile = document.getElementById('open_edit_popup_button')
 const buttonClosePopupProfile = document.getElementById('button_close_popup_profile')
@@ -20,7 +24,7 @@ const cardUrlInput = document.querySelector('.popup__input_field_url')
 // Выберите элементы, куда должны быть вставлены значения полей
 const profileName = document.querySelector('.profile__title')
 const profileJob = document.querySelector('.profile__subtitle')
-const cardTemplate = document.querySelector('#template').content.querySelector('.element')
+const cardTemplate = document.querySelector('#template')
 const cardsContainer = document.querySelector('.elements')
 const imgPlace = document.querySelector('.popup__img')
 const imgTitle = document.querySelector('.popup__img-title')
@@ -60,47 +64,22 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupProfileContainer)
 }
 
-const createCard = (data) => {
-  // Клонируем шаблон, наполняем его информацией из объекта data, навешиваем всякие обработчики событий, о которых будет инфа ниже
-  const cardCopy = cardTemplate.cloneNode(true)
-  const maskImg = cardCopy.querySelector('.element__mask-img')
-  cardCopy.querySelector('.element__title').textContent = data.name
-  maskImg.src = data.link
-  const trashButton = cardCopy.querySelector('.element__trash')
-  trashButton.addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove()
-  })
-  const likesButton = cardCopy.querySelector('.element__button')
-  likesButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__button_color_black')
-  })
-  maskImg.addEventListener('click', function (data) {
-    imgPlace.setAttribute('src', maskImg.getAttribute('src'))
-    imgPlace.setAttribute('alt', maskImg.getAttribute('alt'))
-    imgTitle.textContent = maskImg.closest('.element').querySelector('.element__title').textContent
-    openPopup(popupImgContainer)
-  })
-  // Возвращаем получившуюся карточку
-  return cardCopy
-}
-
 const renderCard = (data) => {
-  // Создаем карточку на основе данных
-  const cardElement = createCard(data)
-  // Вешаем событие
   // Помещаем ее в контейнер карточек
-  cardsContainer.prepend(cardElement)
+  cardsContainer.prepend(data)
 }
 
-function handleCardFormSubmit (evt) {
-  evt.preventDefault()
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
   const enterInfo = {
     name: `${cardNameInput.value}`,
-    link: `${cardUrlInput.value}`
-  }
-  renderCard(enterInfo)
-  closePopup(popupCardContainer)
-  evt.target.reset()
+    link: `${cardUrlInput.value}`,
+  };
+  const card = new Card(enterInfo, "#template", handleCardClick);
+  const cardElement = card.createCard();
+  renderCard(cardElement);
+  closePopup(popupCardContainer);
+  evt.target.reset();
 }
 
 // закрытие попапов при нажатии на esc
@@ -111,7 +90,20 @@ function closeByEscape (evt) {
   }
 }
 
-initialCards.forEach(card => { renderCard(card) })
+function handleCardClick(link, name) {
+  imgPlace.src = link
+  imgPlace.alt = name
+  imgTitle.textContent = name
+  openPopup(popupImgContainer)
+}
+
+initialCards.forEach((item) => {
+  const card = new Card(item, cardTemplate, handleCardClick)
+  const cardElement = card.createCard()
+  renderCard(cardElement)
+})
+
+
 
 //кнопки попапа профиля
 buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
