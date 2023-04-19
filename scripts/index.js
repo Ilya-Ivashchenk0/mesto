@@ -1,35 +1,39 @@
 import { initialCards } from './initialCards.js';
 import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+import {
+  buttonOpenPopupProfile,
+  buttonClosePopupProfile,
+  buttonOpenPopupCard,
+  buttonClosePopupCard,
+  buttonClosePopupImg,
+  popupProfileContainer,
+  popupCardContainer,
+  popupImgContainer,
+  popupProfileForm,
+  popupCardForm,
+  formNameInput,
+  formJobInput,
+  cardNameInput,
+  cardUrlInput,
+  profileName,
+  profileJob,
+  cardTemplate,
+  cardsContainer,
+  imgPlace,
+  imgTitle,
+  popups,
+  buttonSavePopup,
+  objValidate,
+  objInputs
+} from './consts.js'
 
+objInputs.forEach(input => {
+  const formElement = input.closest(objValidate.formSelector)
+  const formValidator = new FormValidator(objValidate, formElement)
+  formValidator.enableValidation()
+})
 
-//кнопки открытия и закрытия попапов
-const buttonOpenPopupProfile = document.getElementById('open_edit_popup_button')
-const buttonClosePopupProfile = document.getElementById('button_close_popup_profile')
-const buttonOpenPopupCard = document.getElementById('button_open_popup_card')
-const buttonClosePopupCard = document.getElementById('button_close_popup_card')
-const buttonClosePopupImg = document.getElementById('button_close_popup_img')
-const overlayClosePopupImg = document.getElementById('button_close_popup_img')
-//контейнеры попапов
-const popupProfileContainer = document.querySelector('.popup_type_profile')
-const popupCardContainer = document.querySelector('.popup_type_card')
-const popupImgContainer = document.querySelector('.popup_type_img')
-// Находим форму в DOM
-const popupProfileForm = document.querySelector('.popup__form_place_profile')
-const popupCardForm = document.querySelector('.popup__form_place_card')
-// Находим поля форм в DOM
-const formNameInput = document.querySelector('.popup__input_field_name')
-const formJobInput = document.querySelector('.popup__input_field_job')
-const cardNameInput = document.querySelector('.popup__input_field_designation')
-const cardUrlInput = document.querySelector('.popup__input_field_url')
-// Выберите элементы, куда должны быть вставлены значения полей
-const profileName = document.querySelector('.profile__title')
-const profileJob = document.querySelector('.profile__subtitle')
-const cardTemplate = document.querySelector('#template')
-const cardsContainer = document.querySelector('.elements')
-const imgPlace = document.querySelector('.popup__img')
-const imgTitle = document.querySelector('.popup__img-title')
-const popups = document.querySelectorAll('.popup')
-const buttonSavePopup = document.getElementById('save_popup-card')
 
 function openPopup (data) {
   data.classList.add('popup_opened')
@@ -70,16 +74,16 @@ const renderCard = (data) => {
 }
 
 function handleCardFormSubmit(evt) {
-  evt.preventDefault();
+  evt.preventDefault()
   const enterInfo = {
     name: `${cardNameInput.value}`,
     link: `${cardUrlInput.value}`,
-  };
-  const card = new Card(enterInfo, "#template", handleCardClick);
-  const cardElement = card.createCard();
-  renderCard(cardElement);
-  closePopup(popupCardContainer);
-  evt.target.reset();
+  }
+  const card = new Card(enterInfo, cardTemplate, handleCardClick)
+  const cardElement = card.createCard()
+  renderCard(cardElement)
+  closePopup(popupCardContainer)
+  evt.target.reset()
 }
 
 // закрытие попапов при нажатии на esc
@@ -129,3 +133,4 @@ popups.forEach(popup => {
     }
   })
 })
+
