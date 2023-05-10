@@ -1,39 +1,18 @@
-import { initialCards } from './initialCards.js';
+import { initialCards } from './initialCards.js'
 import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
-import {
-  buttonOpenPopupProfile,
-  buttonClosePopupProfile,
-  buttonOpenPopupCard,
-  buttonClosePopupCard,
-  buttonClosePopupImg,
-  popupProfileContainer,
-  popupCardContainer,
-  popupImgContainer,
-  popupProfileForm,
-  popupCardForm,
-  formNameInput,
-  formJobInput,
-  cardNameInput,
-  cardUrlInput,
-  profileName,
-  profileJob,
-  cardTemplate,
-  cardsContainer,
-  imgPlace,
-  imgTitle,
-  popups,
-  buttonSavePopup,
-  objValidate,
-  objInputs
-} from './consts.js'
+import consts from './consts.js'
 
-objInputs.forEach(input => {
-  const formElement = input.closest(objValidate.formSelector)
-  const formValidator = new FormValidator(objValidate, formElement)
-  formValidator.enableValidation()
-})
+function createCard(data) {
+  const card = new Card(data, consts.cardTemplate, handleCardClick)
+  return card.createCard()
+}
 
+const profileFormValidator = new FormValidator(consts.objValidate, consts.popupProfileForm)
+profileFormValidator.enableValidation()
+
+const cardFormValidator = new FormValidator(consts.objValidate, consts.popupCardForm)
+cardFormValidator.enableValidation()
 
 function openPopup (data) {
   data.classList.add('popup_opened')
@@ -46,47 +25,34 @@ function closePopup (data) {
 }
 
 function enterProfileInfo () {
-  const profileTitleValue = profileName.textContent
-  const profileSubtitleValue = profileJob.textContent
-  formNameInput.value = `${profileTitleValue}`
-  formJobInput.value = `${profileSubtitleValue}`
-  openPopup(popupProfileContainer)
+  consts.formNameInput.value = consts.profileName.textContent
+  consts.formJobInput.value = consts.profileJob.textContent
+  openPopup(consts.popupProfileContainer)
 }
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
 function handleProfileFormSubmit (evt) {
-  evt.preventDefault()// Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
-  // О том, как это делать, расскажем позже.
-  // Получите значение полей jobInput и nameInput из свойства value
-  const nameValue = formNameInput.value
-  const jobValue = formJobInput.value
-  // Вставьте новые значения с помощью textContent
-  profileName.textContent = `${nameValue}`
-  profileJob.textContent = `${jobValue}`
-  closePopup(popupProfileContainer)
+  evt.preventDefault()
+  consts.profileName.textContent = consts.formNameInput.value
+  consts.profileJob.textContent = consts.formJobInput.value
+  closePopup(consts.popupProfileContainer)
 }
 
 const renderCard = (data) => {
-  // Помещаем ее в контейнер карточек
-  cardsContainer.prepend(data)
+  consts.cardsContainer.prepend(data)
 }
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault()
   const enterInfo = {
-    name: `${cardNameInput.value}`,
-    link: `${cardUrlInput.value}`,
+    name: consts.cardNameInput.value,
+    link: consts.cardUrlInput.value,
   }
-  const card = new Card(enterInfo, cardTemplate, handleCardClick)
-  const cardElement = card.createCard()
+  const cardElement = createCard(enterInfo)
   renderCard(cardElement)
-  closePopup(popupCardContainer)
+  closePopup(consts.popupCardContainer)
   evt.target.reset()
 }
 
-// закрытие попапов при нажатии на esc
 function closeByEscape (evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened')
@@ -95,42 +61,32 @@ function closeByEscape (evt) {
 }
 
 function handleCardClick(link, name) {
-  imgPlace.src = link
-  imgPlace.alt = name
-  imgTitle.textContent = name
-  openPopup(popupImgContainer)
+  consts.imgPlace.src = link
+  consts.imgPlace.alt = name
+  consts.imgTitle.textContent = name
+  openPopup(consts.popupImgContainer)
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item, cardTemplate, handleCardClick)
-  const cardElement = card.createCard()
+  const cardElement = createCard(item)
   renderCard(cardElement)
 })
 
-
-
-//кнопки попапа профиля
-buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
-buttonClosePopupProfile.addEventListener('click', function() {closePopup(popupProfileContainer)})
-//кнопки попапа карточек
-buttonOpenPopupCard.addEventListener('click', function() {
-  openPopup(popupCardContainer)
-  buttonSavePopup.setAttribute('disabled', 'disabled')
-  buttonSavePopup.classList.add('popup__save-button_disabled')
+consts.buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
+consts.buttonClosePopupProfile.addEventListener('click', function() {closePopup(consts.popupProfileContainer)})
+consts.buttonOpenPopupCard.addEventListener('click', function() {
+  openPopup(consts.popupCardContainer)
+  cardFormValidator.resetValidation()
+  cardFormValidator.disableSubmitButton()
 })
-
-buttonClosePopupCard.addEventListener('click', function() {closePopup(popupCardContainer)})
-//кнопки попапа картинки
-buttonClosePopupImg.addEventListener('click', function() {closePopup(popupImgContainer)})
-//кнопки форм
-popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
-popupCardForm.addEventListener('submit', handleCardFormSubmit)
-// закрытие попапов при нажатии на оверлей
-popups.forEach(popup => {
+consts.buttonClosePopupCard.addEventListener('click', function() {closePopup(consts.popupCardContainer)})
+consts.buttonClosePopupImg.addEventListener('click', function() {closePopup(consts.popupImgContainer)})
+consts.popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
+consts.popupCardForm.addEventListener('submit', handleCardFormSubmit)
+consts.popups.forEach(popup => {
   popup.addEventListener('click', event => {
     if (event.target === popup) {
       closePopup(popup)
     }
   })
 })
-

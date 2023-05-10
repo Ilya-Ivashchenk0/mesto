@@ -41,7 +41,7 @@ export class Card {
       this._handleCardImgClick()
     })
   }
-
+  
   createCard() {
     this._element = this._getTemplate()
     this._cardImg = this._element.querySelector('.element__mask-img')
