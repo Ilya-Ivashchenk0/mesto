@@ -14,35 +14,34 @@ export class FormValidator {
     this._submitButton = this._form.querySelector(this._submitButtonSelector)
 
     this._inputs.forEach(input => {
-      this._input = input
-      this._input.addEventListener('input', () => {
-        this._checkInputValidity()
+      input.addEventListener('input', () => {
+        this._checkInputValidity(input)
         this._toggleSubmitButtonState()
       })
     })
   }
 
-  _checkInputValidity () {
-    this._errorPlace = this._form.querySelector(`#${this._input.getAttribute('name')}-error`)
-    this._isValid = this._input.validity.valid
-    this._toggleErrorMessages()
-    this._toggleInputErrorClass()
+  _checkInputValidity (input) {
+    this._errorPlace = this._form.querySelector(`#${input.getAttribute('name')}-error`)
+    this._isValid = input.validity.valid
+    this._toggleErrorMessages(input)
+    this._toggleInputErrorClass(input)
   }
 
-  _toggleInputErrorClass () {
+  _toggleInputErrorClass (input) {
     if (this._isValid) {
-      this._input.classList.remove(this._inputErrorClass)
+      input.classList.remove(this._inputErrorClass)
     } else {
-      this._input.classList.add(this._inputErrorClass)
+      input.classList.add(this._inputErrorClass)
     }
   }
 
-  _toggleErrorMessages () {
+  _toggleErrorMessages (input) {
     if (this._isValid) {
       this._errorPlace.textContent = ''
       this._errorPlace.classList.remove(this._errorClass)
     } else {
-      this._errorPlace.textContent = this._input.validationMessage
+      this._errorPlace.textContent = input.validationMessage
       this._errorPlace.classList.add(this._errorClass)
     }
   }
@@ -72,7 +71,7 @@ export class FormValidator {
       this.disableSubmitButton()
     }
   }
-  
+
   resetValidation() {
     this._inputs.forEach(inputElement => {
       this._errorPlace = this._form.querySelector(`#${inputElement.getAttribute('name')}-error`)
