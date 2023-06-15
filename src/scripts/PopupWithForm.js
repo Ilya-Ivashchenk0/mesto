@@ -1,19 +1,16 @@
 import { Popup } from './Popup.js'
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, ) {
+  constructor(popupSelector, formSubmitHandler) {
     super(popupSelector)
     this._form = this._popup.querySelector('.popup__form_place_card')
+    this._formSubmitHandler = formSubmitHandler
   }
 
   _getInputValues() {
-    this._inputTitle = this._form.querySelector('.popup__input_field_designation')
-    this._inputUrl = this._form.querySelector('.popup__input_field_url')
-    const enterInfo = {
-      title: this._inputTitle.value,
-      link: this._inputUrl.value
-    }
-    return enterInfo
+    const inputValues = {}
+    this._form.querySelectorAll('.popup__input').forEach(input => inputValues[input.name] = input.value)
+    return inputValues
   }
 
   setEventListeners() {
@@ -25,7 +22,7 @@ export class PopupWithForm extends Popup {
   }
 
   close() {
-    super.close()
     this._form.reset()
+    super.close()
   }
 }

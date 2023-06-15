@@ -31,6 +31,7 @@ import { Section } from './scripts/Section.js'
 import { Popup } from './scripts/Popup.js'
 import { PopupWithImage } from './scripts/PopupWithImage.js'
 import { PopupWithForm } from './scripts/PopupWithForm.js'
+import { UserInfo } from './scripts/UserInfo.js'
 import consts from './scripts/consts.js'
 
 const section = new Section({
@@ -42,42 +43,46 @@ const section = new Section({
 }, consts.cardsContainer)
 section.rendererItems()
 
-const profileFormValidator = new FormValidator(consts.objValidate, consts.popupProfileForm) // валидация попапа профиля
+const profileFormValidator = new FormValidator(consts.objValidate, consts.popupProfileForm)
 profileFormValidator.enableValidation()
 
-const cardFormValidator = new FormValidator(consts.objValidate, consts.popupCardForm) // валидация попапа добавления арточек
+const cardFormValidator = new FormValidator(consts.objValidate, consts.popupCardForm)
 cardFormValidator.enableValidation()
+
+const popup = new Popup(consts.popupProfileContainer)
 
 const popupWithImage = new PopupWithImage(consts.popupImgSelector)
 
-const popupWithForm = new PopupWithForm(consts.popupCardSelector, (evt) => {
-  evt.preventDefault()
+const popupWithForm = new PopupWithForm(consts.popupCardSelector, handleCardFormSubmit)
 
+const userInfo = new UserInfo({
+  nameSelector: consts.profileNameSelector,
+  jobSelector: consts.profileJobSelector
 })
 
 function enterProfileInfo () {
-  consts.formNameInput.value = consts.profileName.textContent
-  consts.formJobInput.value = consts.profileJob.textContent
+  userInfo.getUserInfo()
   popup.open(consts.popupProfileContainer)
 }
 
 function handleProfileFormSubmit (evt) {
   evt.preventDefault()
-  consts.profileName.textContent = consts.formNameInput.value
-  consts.profileJob.textContent = consts.formJobInput.value
-  closePopup(consts.popupProfileContainer)
+  userInfo.setUserInfo({
+    name: consts.formNameInput.value,
+    job: consts.formJobInput.value
+  })
+  popup.close()
 }
 
-function handleCardFormSubmit() {
-  evt.preventDefault()
+function handleCardFormSubmit(formData) {
   const enterInfo = {
-    name: consts.cardNameInput.value,
-    link: consts.cardUrlInput.value,
+    name: formData.name,
+    link: formData.url
   }
-  const cardElement = section.renderer(enterInfo)
+  const card = new Card(enterInfo, consts.cardTemplate, handleCardClick)
+  const cardElement = card.createCard()
   section.addItem(cardElement)
-  closePopup(consts.popupCardContainer)
-  evt.target.reset()
+  popupWithForm.close()
 }
 
 function handleCardClick(link, name) {
@@ -85,7 +90,9 @@ function handleCardClick(link, name) {
 }
 
 consts.buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
-consts.buttonClosePopupProfile.addEventListener('click', function() {closePopup(consts.popupProfileContainer)})
+consts.buttonClosePopupProfile.addEventListener('click', function() {
+  popup.close()
+})
 consts.buttonOpenPopupCard.addEventListener('click', function() {
   popupWithForm.open()
   cardFormValidator.resetValidation()
@@ -98,4 +105,3 @@ consts.buttonClosePopupImg.addEventListener('click', () => {
   popupWithImage.close()
 })
 consts.popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
-consts.popupCardForm.addEventListener('submit', handleCardFormSubmit)
