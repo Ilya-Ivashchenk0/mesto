@@ -1,5 +1,4 @@
 import './index.css'
-
 // теперь картинки можно импортировать,
 // вебпак добавит в переменные правильные пути
 const add = new URL('./images/add.svg', import.meta.url)
@@ -28,33 +27,38 @@ const imgs = [
 import { initialCards } from './scripts/initialCards.js'
 import { Card } from './scripts/Card.js'
 import { FormValidator } from './scripts/FormValidator.js'
+import { Section } from './scripts/Section.js'
+import { Popup } from './scripts/Popup.js'
+import { PopupWithImage } from './scripts/PopupWithImage.js'
+import { PopupWithForm } from './scripts/PopupWithForm.js'
 import consts from './scripts/consts.js'
 
-function createCard(data) {
-  const card = new Card(data, consts.cardTemplate, handleCardClick)
-  return card.createCard()
-}
+const section = new Section({
+  items: initialCards,
+  renderer: (data) => {
+    const card = new Card(data, consts.cardTemplate, handleCardClick)
+    return card.createCard()
+  }
+}, consts.cardsContainer)
+section.rendererItems()
 
-const profileFormValidator = new FormValidator(consts.objValidate, consts.popupProfileForm)
+const profileFormValidator = new FormValidator(consts.objValidate, consts.popupProfileForm) // валидация попапа профиля
 profileFormValidator.enableValidation()
 
-const cardFormValidator = new FormValidator(consts.objValidate, consts.popupCardForm)
+const cardFormValidator = new FormValidator(consts.objValidate, consts.popupCardForm) // валидация попапа добавления арточек
 cardFormValidator.enableValidation()
 
-function openPopup (data) {
-  data.classList.add('popup_opened')
-  document.addEventListener('keydown', closeByEscape)
-}
+const popupWithImage = new PopupWithImage(consts.popupImgSelector)
 
-function closePopup (data) {
-  data.classList.remove('popup_opened')
-  document.removeEventListener('keydown', closeByEscape)
-}
+const popupWithForm = new PopupWithForm(consts.popupCardSelector, (evt) => {
+  evt.preventDefault()
+
+})
 
 function enterProfileInfo () {
   consts.formNameInput.value = consts.profileName.textContent
   consts.formJobInput.value = consts.profileJob.textContent
-  openPopup(consts.popupProfileContainer)
+  popup.open(consts.popupProfileContainer)
 }
 
 function handleProfileFormSubmit (evt) {
@@ -64,56 +68,34 @@ function handleProfileFormSubmit (evt) {
   closePopup(consts.popupProfileContainer)
 }
 
-const renderCard = (data) => {
-  consts.cardsContainer.prepend(data)
-}
-
-function handleCardFormSubmit(evt) {
+function handleCardFormSubmit() {
   evt.preventDefault()
   const enterInfo = {
     name: consts.cardNameInput.value,
     link: consts.cardUrlInput.value,
   }
-  const cardElement = createCard(enterInfo)
-  renderCard(cardElement)
+  const cardElement = section.renderer(enterInfo)
+  section.addItem(cardElement)
   closePopup(consts.popupCardContainer)
   evt.target.reset()
 }
 
-function closeByEscape (evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened')
-    closePopup(openedPopup)
-  }
-}
-
 function handleCardClick(link, name) {
-  consts.imgPlace.src = link
-  consts.imgPlace.alt = name
-  consts.imgTitle.textContent = name
-  openPopup(consts.popupImgContainer)
+  popupWithImage.open(link, name)
 }
-
-initialCards.forEach((item) => {
-  const cardElement = createCard(item)
-  renderCard(cardElement)
-})
 
 consts.buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
 consts.buttonClosePopupProfile.addEventListener('click', function() {closePopup(consts.popupProfileContainer)})
 consts.buttonOpenPopupCard.addEventListener('click', function() {
-  openPopup(consts.popupCardContainer)
+  popupWithForm.open()
   cardFormValidator.resetValidation()
   cardFormValidator.disableSubmitButton()
 })
-consts.buttonClosePopupCard.addEventListener('click', function() {closePopup(consts.popupCardContainer)})
-consts.buttonClosePopupImg.addEventListener('click', function() {closePopup(consts.popupImgContainer)})
+consts.buttonClosePopupCard.addEventListener('click', () => {
+  popupWithForm.close()
+})
+consts.buttonClosePopupImg.addEventListener('click', () => {
+  popupWithImage.close()
+})
 consts.popupProfileForm.addEventListener('submit', handleProfileFormSubmit)
 consts.popupCardForm.addEventListener('submit', handleCardFormSubmit)
-consts.popups.forEach(popup => {
-  popup.addEventListener('click', event => {
-    if (event.target === popup) {
-      closePopup(popup)
-    }
-  })
-})

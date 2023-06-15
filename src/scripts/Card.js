@@ -11,7 +11,6 @@ export class Card {
       .content
       .querySelector('.element')
       .cloneNode(true)
-
     return cardElement
   }
 
@@ -27,7 +26,6 @@ export class Card {
     this._handleCardClick(this._link, this._name)
   }
 
-
   _setEventListener() {
     this._likeButton.addEventListener('click', () => {
       this._handleCardLike()
@@ -41,7 +39,7 @@ export class Card {
       this._handleCardImgClick()
     })
   }
-  
+
   createCard() {
     this._element = this._getTemplate()
     this._cardImg = this._element.querySelector('.element__mask-img')
@@ -50,9 +48,7 @@ export class Card {
     this._element.querySelector('.element__title').textContent = this._name
     this._likeButton = this._element.querySelector('.element__button')
     this._trashButton = this._element.querySelector('.element__trash')
-
     this._setEventListener()
-
     return this._element
   }
 }

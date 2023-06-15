@@ -9,6 +9,8 @@ const consts = {
   popupImgContainer: document.querySelector('.popup_type_img'),
   popupProfileForm: document.querySelector('.popup__form_place_profile'),
   popupCardForm: document.querySelector('.popup__form_place_card'),
+  popupImgSelector: '.popup_type_img',
+  popupCardSelector: '.popup_type_card',
   formNameInput: document.querySelector('.popup__input_field_name'),
   formJobInput: document.querySelector('.popup__input_field_job'),
   cardNameInput: document.querySelector('.popup__input_field_designation'),
