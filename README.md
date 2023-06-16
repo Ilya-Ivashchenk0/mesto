@@ -6,7 +6,7 @@
 
 **Технологии**
 
-HTML5 + CSS3 + JavaScript
+HTML5 + CSS3 + JavaScript + ООП + Webpack
 
 Grid Layout and Flex Box
 

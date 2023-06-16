@@ -1,6 +1,5 @@
 export class FormValidator {
   constructor (objValidate, formElement) {
-    this._formSelector = objValidate.formSelector
     this._inputSelector = objValidate.inputSelector
     this._submitButtonSelector = objValidate.submitButtonSelector
     this._inactiveButtonClass = objValidate.inactiveButtonClass
@@ -23,13 +22,12 @@ export class FormValidator {
 
   _checkInputValidity (input) {
     this._errorPlace = this._form.querySelector(`#${input.getAttribute('name')}-error`)
-    this._isValid = input.validity.valid
     this._toggleErrorMessages(input)
     this._toggleInputErrorClass(input)
   }
 
   _toggleInputErrorClass (input) {
-    if (this._isValid) {
+    if (input.validity.valid) {
       input.classList.remove(this._inputErrorClass)
     } else {
       input.classList.add(this._inputErrorClass)
@@ -37,7 +35,7 @@ export class FormValidator {
   }
 
   _toggleErrorMessages (input) {
-    if (this._isValid) {
+    if (input.validity.valid) {
       this._errorPlace.textContent = ''
       this._errorPlace.classList.remove(this._errorClass)
     } else {
@@ -47,8 +45,15 @@ export class FormValidator {
   }
 
   _toggleSubmitButtonState () {
-    this._isEveryInputValid = Array.from(this._inputs).every(input => input.validity.valid)
-    this._toggleButtonState()
+    if (!this._submitButton) {
+      return
+    }
+    const isEveryInputValid = Array.from(this._inputs).every(input => input.validity.valid)
+    if (isEveryInputValid) {
+      this._enableSubmitButton()
+    } else {
+      this.disableSubmitButton()
+    }
   }
 
   _enableSubmitButton () {
@@ -61,23 +66,13 @@ export class FormValidator {
     this._submitButton.classList.add(this._inactiveButtonClass)
   }
 
-  _toggleButtonState() {
-    if (!this._submitButton) {
-      return
-    }
-    if (this._isEveryInputValid) {
-      this._enableSubmitButton()
-    } else {
-      this.disableSubmitButton()
-    }
-  }
-
   resetValidation() {
     this._inputs.forEach(inputElement => {
       this._errorPlace = this._form.querySelector(`#${inputElement.getAttribute('name')}-error`)
       inputElement.classList.remove(this._inputErrorClass)
       this._errorPlace.textContent = ''
       this._errorPlace.classList.remove(this._errorClass)
+      this._toggleSubmitButtonState()
     })
   }
 
@@ -87,7 +82,7 @@ export class FormValidator {
     })
     this._setEventListeners()
     this._form.addEventListener('reset', () => {
-      this._toggleButtonState()
+      this._toggleSubmitButtonState()
     })
   }
 }
