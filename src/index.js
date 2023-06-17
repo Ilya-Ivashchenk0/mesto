@@ -23,10 +23,13 @@ const cardFormValidator = new FormValidator(consts.objValidate, consts.popupCard
 cardFormValidator.enableValidation()
 
 const popupImage = new PopupWithImage(consts.popupImgSelector)
+popupImage.setEventListeners()
 
 const popupAdd = new PopupWithForm(consts.popupCardSelector, handleCardFormSubmit)
+popupAdd.setEventListeners()
 
 const popupProfile = new PopupWithForm(consts.popupProfileContainer, handleProfileFormSubmit)
+popupProfile.setEventListeners()
 
 const userInfo = new UserInfo({
   nameSelector: consts.profileNameSelector,
@@ -55,22 +58,17 @@ function handleCardFormSubmit(formData) {
     link: formData.url
   }
   createCard(enterInfo)
-  popupAdd.close()
 }
 
 function handleCardClick(link, name) {
   popupImage.open(link, name)
 }
 
-consts.buttonOpenPopupProfile.addEventListener('click', enterProfileInfo)
+consts.buttonOpenPopupProfile.addEventListener('click', () => {
+  enterProfileInfo()
+})
 consts.buttonOpenPopupCard.addEventListener('click', () => {
   popupAdd.open()
   cardFormValidator.resetValidation()
   cardFormValidator.disableSubmitButton()
-})
-consts.buttonClosePopupCard.addEventListener('click', () => {
-  popupAdd.close()
-})
-consts.buttonClosePopupImg.addEventListener('click', () => {
-  popupImage.close()
 })

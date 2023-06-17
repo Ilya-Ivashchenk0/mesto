@@ -45,9 +45,6 @@ export class FormValidator {
   }
 
   _toggleSubmitButtonState () {
-    if (!this._submitButton) {
-      return
-    }
     const isEveryInputValid = Array.from(this._inputs).every(input => input.validity.valid)
     if (isEveryInputValid) {
       this._enableSubmitButton()
