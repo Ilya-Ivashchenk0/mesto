@@ -1,3 +1,5 @@
+import env from '../../env'
+
 const consts = {
   buttonOpenPopupProfile: document.getElementById('open_edit_popup_button'),
   buttonClosePopupProfile: document.getElementById('button_close_popup_profile'),
@@ -5,6 +7,8 @@ const consts = {
   buttonClosePopupCard: document.getElementById('button_close_popup_card'),
   buttonClosePopupImg: document.getElementById('button_close_popup_img'),
   buttonSavePopupProfile: document.querySelector('.popup__save-button'),
+  buttonSavePopupAvatar: document.querySelector('#save_popup-avatar'),
+  buttonDeletePopupCard: document.querySelector('#delete_popup-delete'),
   popupProfileContainer: '.popup_type_profile',
   popupCardContainer: document.querySelector('.popup_type_card'),
   popupImgContainer: document.querySelector('.popup_type_img'),
@@ -21,13 +25,18 @@ const consts = {
   profileNameSelector: '.profile__title',
   profileJobSelector: '.profile__subtitle',
   profileImgSelector: '.profile__avatar',
-  profileAvatar: document.querySelector('.profile__avatar'),
+  profileAvatarButton: document.querySelector('.profile__avatar-button'),
   cardTemplate: document.querySelector('#template'),
-  cardsContainer: document.querySelector('.elements'),
+  cardsContainer: '.elements',
   imgPlace: document.querySelector('.popup__img'),
   imgTitle: document.querySelector('.popup__img-title'),
   popups: document.querySelectorAll('.popup'),
   buttonSavePopup: document.getElementById('save_popup-card'),
+  baseUrl: `https://mesto.nomoreparties.co/v1/${env.GROUP_ID}`,
+  headers: {
+    authorization: env.TOKEN,
+    'Content-Type': 'application/json'
+  },
   objValidate: {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',

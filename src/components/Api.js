@@ -1,175 +1,74 @@
-import env from '../../env'
-
 export class Api {
   constructor(options) {
+    this._baseUrl = options.baseUrl
+    this._headers = options.headers
+  }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`)
+    }
+    return res.json()
   }
 
   getInitialCards() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${env.GROUP_ID}/cards`, {
-      method: 'GET',
-      headers: {
-        authorization: env.TOKEN
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+    return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
+      .then(this._getResponseData)
   }
 
   getUserInfo() {
-    return fetch(`https://nomoreparties.co/v1/${env.GROUP_ID}/users/me`, {
-      method: 'GET',
-      headers: {
-        authorization: env.TOKEN
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+    return fetch(`${this._baseUrl}/users/me`, { method: 'GET', headers: this._headers })
+      .then(this._getResponseData)
   }
 
   setUserInfo(data) {
-    return fetch(`https://nomoreparties.co/v1/${env.GROUP_ID}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: env.TOKEN,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.username,
         about: data.about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+      .then(this._getResponseData)
   }
 
   addNewCard(data) {
-    return fetch(`https://nomoreparties.co/v1/${env.GROUP_ID}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: {
-        authorization: env.TOKEN,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        link: data.link
+        link: data.link,
+        likes: []
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+    .then(this._getResponseData)
   }
 
   deleteCard(data) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${env.GROUP_ID}/cards/${data}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: env.TOKEN
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+    return fetch(`${this._baseUrl}/cards/${data}`, { method: 'DELETE', headers: this._headers })
+      .then(this._getResponseData)
   }
 
   addLike(data) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${env.GROUP_ID}/cards/${data}/likes`, {
-      method: 'PUT',
-      headers: {
-        authorization: env.TOKEN
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+    return fetch(`${this._baseUrl}/cards/${data}/likes`, { method: 'PUT', headers: this._headers })
+      .then(this._getResponseData)
   }
 
-
-
   deleteLike(data) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${env.GROUP_ID}/cards/${data}/likes`, {
-      method: 'DELETE',
-      headers: {
-        authorization: env.TOKEN
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+    return fetch(`${this._baseUrl}/cards/${data}/likes`, { method: 'DELETE', headers: this._headers })
+      .then(this._getResponseData)
   }
 
   setUserAvatar(link) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${env.GROUP_ID}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: env.TOKEN,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
-      })
-      .catch((err) => {
-        console.log(err) // выведем ошибку в консоль
-      })
+      .then(this._getResponseData)
   }
 }

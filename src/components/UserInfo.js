@@ -2,7 +2,7 @@ export class UserInfo {
   constructor({ nameSelector, jobSelector, imgSelector }) {
     this._nameElement = document.querySelector(nameSelector)
     this._jobElement = document.querySelector(jobSelector)
-    this._ImgElement = document.querySelector(imgSelector)
+    this._imgElement = document.querySelector(imgSelector)
   }
 
   getUserInfo() {
@@ -19,6 +19,6 @@ export class UserInfo {
   }
 
   setUserAvatar(url) {
-    this._ImgElement.src = url
+    this._imgElement.src = url
   }
 }

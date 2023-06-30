@@ -1,10 +1,9 @@
-import env from '../../env'
-
 export class Card {
-  constructor(data, templateSelector, handleCardClick, handlePopupDelete, addLike, deleteLike) {
+  constructor(data, myId, templateSelector, handleCardClick, handlePopupDelete, addLike, deleteLike) {
     this._name = data.name
     this._link = data.link
     this._likes = data.likes
+    this._myId = myId
     this._ownerId = data.owner ? data.owner._id : null
     this._cardId = data._id
     this._templateSelector = templateSelector
@@ -24,18 +23,19 @@ export class Card {
 
   _handleCardDelete() {
     this._element.remove()
+    // this._element = null
   }
 
   _handleCardLike(id) {
-    console.log(this._likeButton.classList)
-    if (this._likeButton.classList.contains('element__button_color_black')) {
-      this._deleteLike(id)
-      this._likesLenth.textContent = Number(this._likesLenth.textContent) - 1
+    const check = this._likes.some((like) => {
+      return like._id === this._myId
+    })
+    console.log(check)
+    if (check) {
+      this._deleteLike(id, this._likesLenth, this._likeButton)
     } else {
-      this._addLike(id)
-      this._likesLenth.textContent = Number(this._likesLenth.textContent) + 1
+      this._addLike(id, this._likesLenth, this._likeButton)
     }
-    this._likeButton.classList.toggle('element__button_color_black')
   }
 
   _handleCardImgClick() {
@@ -62,19 +62,15 @@ export class Card {
     this._cardImg = this._element.querySelector('.element__mask-img')
     this._cardImg.src = this._link
     this._cardImg.alt = this._name
-    if(this._likes) {
-      this._likesLenth.textContent = this._likes.length
-    } else {
-      this._likesLenth.textContent = 0
-    }
+    this._likesLenth.textContent = this._likes.length
     this._element.querySelector('.element__title').textContent = this._name
     this._likeButton = this._element.querySelector('.element__button')
     this._trashButton = this._element.querySelector('.element__trash')
-    const myLike = this._likes ? this._likes.some(like => like._id === env.MY_ID) : false
+    const myLike = this._likes ? this._likes.some(like => like._id === this._myId) : false
     if (myLike) {
       this._likeButton.classList.add('element__button_color_black')
     }
-    if (env.MY_ID !== this._ownerId) {
+    if (this._myId !== this._ownerId) {
       this._trashButton.remove()
     }
     this._setEventListener()
