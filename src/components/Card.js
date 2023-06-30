@@ -30,7 +30,6 @@ export class Card {
     const check = this._likes.some((like) => {
       return like._id === this._myId
     })
-    console.log(check)
     if (check) {
       this._deleteLike(id, this._likesLenth, this._likeButton)
     } else {

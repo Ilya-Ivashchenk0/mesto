@@ -50,7 +50,6 @@ consts.buttonOpenPopupCard.addEventListener('click', () => {
   cardFormValidator.resetValidation()
   cardFormValidator.disableSubmitButton()
 })
-console.log(userData)
 function handleCardFormSubmit (formData) {
   const enterInfo = {
     name: formData.name,
