@@ -23,7 +23,7 @@ export class Card {
 
   _handleCardDelete() {
     this._element.remove()
-    // this._element = null
+    this._element = null
   }
 
   _handleCardLike(id) {
@@ -31,9 +31,29 @@ export class Card {
       return like._id === this._myId
     })
     if (check) {
-      this._deleteLike(id, this._likesLenth, this._likeButton)
+      this._deleteLike(id)
+        .then((data) => {
+          this._likes = data.likes
+          this._updateLikes()
+        })
+        .catch(err => console.log(`Ошибка: ${err}`))
     } else {
-      this._addLike(id, this._likesLenth, this._likeButton)
+      this._addLike(id)
+        .then((data) => {
+          this._likes = data.likes
+          this._updateLikes()
+        })
+        .catch(err => console.log(`Ошибка: ${err}`))
+    }
+  }
+
+  _updateLikes() {
+    this._likesLenth.textContent = this._likes.length
+    const myLike = this._likes.some(like => like._id === this._myId)
+    if (myLike) {
+      this._likeButton.classList.add('element__button_color_black')
+    } else {
+      this._likeButton.classList.remove('element__button_color_black')
     }
   }
 
