@@ -76,14 +76,14 @@ function handleCardFormSubmit (formData) {
   const animation = dots(consts.buttonSavePopup)
   animation.start()
   api.addNewCard(enterInfo)
-    .then(() => {
-      setTimeout(() => {
-        popupAdd.close()
-        animation.stop()
-        createCard(enterInfo)
-      }, 1000)
+    .then((response) => {
+      popupAdd.close()
+      createCard(response)
     })
     .catch(err => console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      animation.stop()
+    })
 }
 
 // попап редактирования информации профиля
@@ -101,13 +101,13 @@ function handleProfileFormSubmit (formData) {
   animation.start()
   api.setUserInfo(formData)
     .then(() => {
-      setTimeout(() => {
-        popupProfile.close()
-        animation.stop()
-        userInfo.setUserInfo(formData)
-      }, 1000)
+      popupProfile.close()
+      userInfo.setUserInfo(formData)
     })
     .catch(err => console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      animation.stop()
+    })
 }
 
 // изменение аватара пользователя
@@ -117,13 +117,13 @@ function handlePopupAvatar (link) {
   animation.start()
   api.setUserAvatar(link.url)
     .then(() => {
-      setTimeout(() => {
-        userInfo.setUserAvatar(link.url)
-        popupWithAvatar.close()
-        animation.stop()
-      }, 1000)
+      userInfo.setUserAvatar(link.url)
+      popupWithAvatar.close()
     })
     .catch(err => console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      animation.stop()
+    })
 }
 consts.profileAvatarButton.addEventListener('click', () => {
   popupWithAvatar.open()
